@@ -82,11 +82,11 @@ function BasketViewModel() {
     
     loadItemsFromLocalStorage();
     
-    var basketAsJson = ko.computed(function () {
+    self.basketAsJson = ko.computed(function () {
         return ko.toJSON(self.basketItems());
     });
 
-    basketAsJson.subscribe(function (json) {
+    self.basketAsJson.subscribe(function (json) {
         localStorage.setItem('shoppingBasket', json);
     });
     
@@ -107,10 +107,6 @@ function BasketViewModel() {
             basketItem.quantity(parseInt(item.quantity, 10));
             self.basketItems.push(basketItem);
         }
-        
-        $('.cart-info')
-            .animate({ paddingTop: '30px' })
-            .animate({ paddingTop: '10px' });
     };
 
     var app = Sammy(function () {
@@ -119,7 +115,7 @@ function BasketViewModel() {
             var product = data.filter(function (x) {
                 return x.id === parseInt(context.params.id, 10);
             })[0];
-            product.quantity = 12;
+            product.quantity = 1;
             self.chosenProduct(product);
         });
 
@@ -133,6 +129,15 @@ function BasketViewModel() {
         console.log('rn');
         app.run();
     });
+};
+
+ko.bindingHandlers.animateCart = {
+    
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        $(element)
+            .animate({ paddingTop: '30px' })
+            .animate({ paddingTop: '10px' });
+    }
 };
 
 ko.applyBindings(new BasketViewModel());

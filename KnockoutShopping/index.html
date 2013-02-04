@@ -9,7 +9,7 @@
     <div id="container">
         <div id="header">
             <h1>The JSON Store</h1>
-            <div class="cart-info">
+            <div class="cart-info" data-bind="animateCart: basketAsJson()">
                 My Cart (<span class="cart-items" data-bind="text: basketItemCount() + ' items'"></span>)
             </div>
         </div>
