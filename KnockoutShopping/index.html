@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Knockout Shopping Cart</title>
+    <link href="css/jsonstore.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>The JSON Store</h1>
+            <div class="cart-info">
+                My Cart (<span class="cart-items" data-bind="text: basketItemCount() + ' items'"></span>)
+            </div>
+        </div>
+        <div id="main">
+            <!-- Main Page -->
+            <div data-bind="with: items">
+                <span data-bind="text: $data.length + ' item(s) in stock'"></span>
+                <div data-bind="foreach: $data">
+                    <div class="item">
+                        <div class="item-image">
+                            <a data-bind="attr: { href : '#/' + id }">
+                                <img data-bind="attr: { src: image, alt: title}, text: title" />
+                            </a>
+                        </div>
+                        <div class="item-artist" data-bind="text: artist"></div>
+                        <div class="item-title" data-bind="text: title"></div>
+                        <div class="item-price" data-bind="text: '$' + price"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Detail Page -->
+            <div data-bind="with: chosenProduct">
+                <div class="item-detail">
+                    <div class="item-image">
+                        <img data-bind="attr : { src: large_image, alt: title }" />
+                    </div>
+                    <div class="item-info">
+                        <div class="item-artist" data-bind="text: artist"></div>
+                        <div class="item-title" data-bind="text: title"></div>
+                        <div class="item-price" data-bind="text: '$' + price"></div>
+                        <div class="item-form">
+
+                            <p>
+                                <label>Quantity:</label>
+                                <input type="text" size="2" data-bind="value: quantity" />
+                            </p>
+                            <p>
+                                <button data-bind="click: $parent.addItem">Add to Cart</button>
+                            </p>
+
+                        </div>
+                        <div class="item-link"><a data-bind="attr: {href: url }">Buy this item on Amazon</a></div>
+                        <div class="back-link"><a href="#/">&laquo; Back to Items</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="Scripts/knockout-2.2.1.js"></script>
+    <script src="Scripts/jquery-1.4.4.js"></script>
+    <script src="Scripts/sammy-0.7.4.js"></script>
+    <script src="Scripts/basketviewmodel.js"></script>
+    <script type="text/javascript">
+       
+        
+    </script>
+
+</body>
+</html>
